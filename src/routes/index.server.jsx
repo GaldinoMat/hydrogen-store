@@ -14,7 +14,7 @@ import ProductCard from '../components/ProductCard';
 import Welcome from '../components/Welcome.server';
 import {Suspense} from 'react';
 import {log} from '@shopify/hydrogen';
-import Hero from '../components/Home/Hero';
+import Hero from '../components/Home/Hero/Hero.client';
 
 export default function Index({country = {isoCode: 'US'}}) {
   return (
