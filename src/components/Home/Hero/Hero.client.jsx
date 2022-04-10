@@ -6,7 +6,7 @@ import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function Hero() {
   return (
-    <div className="sm:h-auto xl:h-[660px]">
+    <div className="xl:h-[660px] sm:h-fit">
       <Carousel>
         <CarouselItem>
           <div className="bg-bg-hero-1 bg-no-repeat bg-center w-full h-full sm:pt-16 xl:pt-40 pb-10">
@@ -70,11 +70,11 @@ function Carousel({ children }) {
           })}
         </div>
       </div>
-      <div className="absolute top-2/4 left-32 w-5/6">
-        <button className="absolute top-2/4 left-[-100px] h-7" onClick={() => UpdateIndex(activeIndex - 1)}>
+      <div className="absolute xl:top-2/4 xl:left-32 xl:w-5/6 sm:w-52 sm:left-4 sm:bottom-1/4">
+        <button className="absolute top-2/4 xl:left-[-100px] h-7 sm:left-0" onClick={() => UpdateIndex(activeIndex - 1)}>
           <FontAwesomeIcon icon={faArrowLeft} className="h-7" />
         </button>
-        <button className="absolute top-2/4 right-[-100px] h-7" onClick={() => UpdateIndex(activeIndex + 1)}>
+        <button className="absolute top-2/4 xl:right-[-100px] h-7 sm:right-0" onClick={() => UpdateIndex(activeIndex + 1)}>
           <FontAwesomeIcon icon={faArrowRight} className="h-7" />
         </button>
       </div>
