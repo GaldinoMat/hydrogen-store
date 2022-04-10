@@ -18,6 +18,9 @@ module.exports = {
       '1/2': '50%',
       'more-than-half': '66%'
     },
+    fontFamily: {
+      'site': ['"Nunito Sans"']
+    },
     extend: {
       typography: (theme) => ({
         DEFAULT: {
