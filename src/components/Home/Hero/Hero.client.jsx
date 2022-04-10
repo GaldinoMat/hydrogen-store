@@ -54,7 +54,7 @@ export default function Hero() {
           </div>
         </CarouselItem>
         <CarouselItem>
-          <div className="bg-bg-hero-1 bg-no-repeat bg-center w-full h-full sm:pt-16 xl:pt-40 pb-10">
+          <div className="w-full h-full sm:pt-16 xl:pt-40 pb-10">
             <div className="sm:w-full md:max-w-[720px] xl:max-w-[1170px] px-4 md:mx-auto">
               <div className="flex flex-col flex-wrap">
                 <div className="xl:flex-half xl:max-w-1/2 md:max-w-more-than-half md:flex-more-than-half">
