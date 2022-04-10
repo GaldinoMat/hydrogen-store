@@ -2,7 +2,8 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     backgroundImage: {
-      "bg-hero": "url('https://cdn.shopify.com/s/files/1/0610/1870/1985/files/hero-1_jpg.webp?v=1649522164')"
+      "bg-hero-1": "url('https://cdn.shopify.com/s/files/1/0610/1870/1985/files/hero-1_jpg.webp?v=1649522164')",
+      "bg-hero-2": "url('https://cdn.shopify.com/s/files/1/0610/1870/1985/files/hero-2_jpg.webp?v=1649551282')"
     },
     screens:{
       "sm": "420px",
