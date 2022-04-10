@@ -6,15 +6,29 @@ import {
   faPinterest,
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 
 export default function Hero() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [backgroundImage, setBackgroundImage] = useState('');
+
+  useEffect(() => {
+    const backgroundImages = [
+      "url('https://cdn.shopify.com/s/files/1/0610/1870/1985/files/hero-1_jpg.webp?v=1649522164')",
+      "url('https://cdn.shopify.com/s/files/1/0610/1870/1985/files/hero-2_jpg.webp?v=1649551282')",
+    ];
+    setBackgroundImage(backgroundImages[activeIndex]);
+  }, [activeIndex]);
+
   return (
-    <div className="xl:h-[660px] sm:h-fit">
-      <Carousel>
+    <div
+      className="xl:h-[660px] sm:h-fit bg-no-repeat bg-center"
+      style={{backgroundImage}}
+    >
+      <Carousel activeIndex={activeIndex} setActiveIndex={setActiveIndex}>
         <CarouselItem>
-          <div className="bg-bg-hero-1 bg-no-repeat bg-center w-full h-full sm:pt-16 xl:pt-40 pb-10">
+          <div className="w-full h-full sm:pt-16 xl:pt-40 pb-10">
             <div className="sm:w-full md:max-w-[720px] xl:max-w-[1170px] px-4 md:mx-auto">
               <div className="flex flex-col flex-wrap">
                 <div className="xl:flex-half xl:max-w-1/2 md:max-w-more-than-half md:flex-more-than-half">
@@ -36,12 +50,11 @@ export default function Hero() {
                   />
                 </div>
               </div>
-              <Socials />
             </div>
           </div>
         </CarouselItem>
         <CarouselItem>
-          <div className="bg-bg-hero-2 bg-no-repeat bg-center w-full h-full sm:pt-16 xl:pt-40 pb-10">
+          <div className="bg-bg-hero-1 bg-no-repeat bg-center w-full h-full sm:pt-16 xl:pt-40 pb-10">
             <div className="sm:w-full md:max-w-[720px] xl:max-w-[1170px] px-4 md:mx-auto">
               <div className="flex flex-col flex-wrap">
                 <div className="xl:flex-half xl:max-w-1/2 md:max-w-more-than-half md:flex-more-than-half">
@@ -63,55 +76,33 @@ export default function Hero() {
                   />
                 </div>
               </div>
-              <Socials />
             </div>
           </div>
         </CarouselItem>
       </Carousel>
+      <Socials />
     </div>
   );
 }
 
-function Carousel({children}) {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const UpdateIndex = (newIndex) => {
-    if (newIndex < 0) {
-      newIndex = React.Children.count(children) - 1;
-    } else if (newIndex >= React.Children.count(children)) {
-      newIndex = 0;
-    }
-    setActiveIndex(newIndex);
-  };
-
-  function returnTranformTranslation() {
-    return `translateX(-${activeIndex * 100}%)`;
-  }
-
+function Carousel({children, activeIndex, setActiveIndex}) {
   return (
     <div className="relative">
       <div className="overflow-hidden">
         <div
           className="whitespace-nowrap transition-all duration-500"
-          style={{transform: returnTranformTranslation()}}
+          style={{transform: `translateX(-${activeIndex * 100}%)`}}
         >
           {React.Children.map(children, (child, _index) => {
             return React.cloneElement(child, {width: '100%'});
           })}
         </div>
       </div>
-      <button
-        className="absolute xl:top-2/4 xl:left-24 h-7 md:left-0 sm:bottom-24 md:top-52 sm:left-6"
-        onClick={() => UpdateIndex(activeIndex - 1)}
-      >
-        <FontAwesomeIcon icon={faArrowLeft} className="h-7" />
-      </button>
-      <button
-        className="absolute xl:top-2/4 xl:right-24 h-7 md:right-0 sm:bottom-24 md:top-52 sm:left-48"
-        onClick={() => UpdateIndex(activeIndex + 1)}
-      >
-        <FontAwesomeIcon icon={faArrowRight} className="h-7" />
-      </button>
+      <CarouselArrows
+        childrenNodes={children}
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+      />
     </div>
   );
 }
@@ -124,9 +115,37 @@ function CarouselItem({children, width}) {
   );
 }
 
+function CarouselArrows({childrenNodes, activeIndex, setActiveIndex}) {
+  const UpdateIndex = (newIndex) => {
+    if (newIndex < 0) {
+      newIndex = React.Children.count(childrenNodes) - 1;
+    } else if (newIndex >= React.Children.count(childrenNodes)) {
+      newIndex = 0;
+    }
+    setActiveIndex(newIndex);
+  };
+
+  return (
+    <>
+      <button
+        className="absolute xl:top-2/4 xl:left-24 h-7 md:left-0 md:top-52 sm:left-6"
+        onClick={() => UpdateIndex(activeIndex - 1)}
+      >
+        <FontAwesomeIcon icon={faArrowLeft} className="h-7" />
+      </button>
+      <button
+        className="absolute xl:top-2/4 xl:right-24 h-7 md:right-0 md:top-52 sm:left-48"
+        onClick={() => UpdateIndex(activeIndex + 1)}
+      >
+        <FontAwesomeIcon icon={faArrowRight} className="h-7" />
+      </button>
+    </>
+  );
+}
+
 function Socials() {
   return (
-    <div className="mt-24 flex">
+    <div className="mt-16 pb-8 sm:mx-4 md:mx-10 xl:mx-96 flex">
       <Button
         label={
           <FontAwesomeIcon icon={faFacebookF} className="w-3 text-gray-900" />
