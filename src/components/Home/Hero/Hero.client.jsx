@@ -1,8 +1,13 @@
-import Button from "../../Button.client";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebookF, faTwitter, faPinterest, faInstagram } from "@fortawesome/free-brands-svg-icons"
-import React, { useState } from "react";
-import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Button from '../../Button.client';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {
+  faFacebookF,
+  faTwitter,
+  faPinterest,
+  faInstagram,
+} from '@fortawesome/free-brands-svg-icons';
+import React, {useState} from 'react';
+import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 
 export default function Hero() {
   return (
@@ -13,11 +18,22 @@ export default function Hero() {
             <div className="sm:w-full md:max-w-[720px] xl:max-w-[1170px] px-4 md:mx-auto">
               <div className="flex flex-col flex-wrap">
                 <div className="xl:flex-half xl:max-w-1/2 md:max-w-more-than-half md:flex-more-than-half">
-                  <h6 className="sm:text-sm font-bold uppercase tracking-[2px] text-red-500 mb-7">Summer Collection</h6>
-                  <h2 className="text-5xl font-bold text-black mb-8 ">Fall-Winter Collections 2030</h2>
-                  <p className="text-base mb-9 text-gray-800">A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                    commitment to exceptional quality.</p>
-                  <Button label="Shop Now ->" url="/" className="w-52 py-4 text-sm rounded-none tracking-widest" />
+                  <h6 className="sm:text-sm font-bold uppercase tracking-[2px] text-red-500 mb-7">
+                    Summer Collection
+                  </h6>
+                  <h2 className="text-5xl font-bold text-black mb-8 ">
+                    Fall-Winter Collections 2030
+                  </h2>
+                  <p className="text-base mb-9 text-gray-800">
+                    A specialist label creating luxury essentials. Ethically
+                    crafted with an unwavering commitment to exceptional
+                    quality.
+                  </p>
+                  <Button
+                    label="Shop Now ->"
+                    url="/"
+                    className="w-52 py-4 text-sm rounded-none tracking-widest"
+                  />
                 </div>
               </div>
               <Socials />
@@ -29,11 +45,22 @@ export default function Hero() {
             <div className="sm:w-full md:max-w-[720px] xl:max-w-[1170px] px-4 md:mx-auto">
               <div className="flex flex-col flex-wrap">
                 <div className="xl:flex-half xl:max-w-1/2 md:max-w-more-than-half md:flex-more-than-half">
-                  <h6 className="sm:text-sm font-bold uppercase tracking-[2px] text-red-500 mb-7">Summer Collection</h6>
-                  <h2 className="text-5xl font-bold text-black mb-8 ">Fall-Winter Collections 2040</h2>
-                  <p className="text-base mb-9 text-gray-800">A specialist label creating luxury essentials. Ethically crafted with an unwavering
-                    commitment to exceptional quality.</p>
-                  <Button label="Shop Now ->" url="/" className="w-52 py-4 text-sm rounded-none tracking-widest" />
+                  <h6 className="sm:text-sm font-bold uppercase tracking-[2px] text-red-500 mb-7">
+                    Summer Collection
+                  </h6>
+                  <h2 className="text-5xl font-bold text-black mb-8 ">
+                    Fall-Winter Collections 2040
+                  </h2>
+                  <p className="text-base mb-9 text-gray-800">
+                    A specialist label creating luxury essentials. Ethically
+                    crafted with an unwavering commitment to exceptional
+                    quality.
+                  </p>
+                  <Button
+                    label="Shop Now ->"
+                    url="/"
+                    className="w-52 py-4 text-sm rounded-none tracking-widest"
+                  />
                 </div>
               </div>
               <Socials />
@@ -42,59 +69,92 @@ export default function Hero() {
         </CarouselItem>
       </Carousel>
     </div>
-  )
+  );
 }
 
-function Carousel({ children }) {
-  const [activeIndex, setActiveIndex] = useState(0)
+function Carousel({children}) {
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const UpdateIndex = (newIndex) => {
     if (newIndex < 0) {
-      newIndex = React.Children.count(children) - 1
+      newIndex = React.Children.count(children) - 1;
     } else if (newIndex >= React.Children.count(children)) {
       newIndex = 0;
     }
-    setActiveIndex(newIndex)
-  }
+    setActiveIndex(newIndex);
+  };
 
   function returnTranformTranslation() {
-    return `translateX(-${(activeIndex * 100)}%)`
+    return `translateX(-${activeIndex * 100}%)`;
   }
 
   return (
     <div className="relative">
       <div className="overflow-hidden">
-        <div className="whitespace-nowrap transition-all duration-500" style={{ transform: returnTranformTranslation() }}>
-          {React.Children.map(children, (child, index) => {
-            return React.cloneElement(child, { width: "100%" })
+        <div
+          className="whitespace-nowrap transition-all duration-500"
+          style={{transform: returnTranformTranslation()}}
+        >
+          {React.Children.map(children, (child, _index) => {
+            return React.cloneElement(child, {width: '100%'});
           })}
         </div>
       </div>
-      <button className="absolute xl:top-2/4 xl:left-24 h-7 md:left-0 sm:bottom-24 md:top-52 sm:left-6" onClick={() => UpdateIndex(activeIndex - 1)}>
+      <button
+        className="absolute xl:top-2/4 xl:left-24 h-7 md:left-0 sm:bottom-24 md:top-52 sm:left-6"
+        onClick={() => UpdateIndex(activeIndex - 1)}
+      >
         <FontAwesomeIcon icon={faArrowLeft} className="h-7" />
       </button>
-      <button className="absolute xl:top-2/4 xl:right-24 h-7 md:right-0 sm:bottom-24 md:top-52 sm:left-48" onClick={() => UpdateIndex(activeIndex + 1)}>
-          <FontAwesomeIcon icon={faArrowRight} className="h-7" />
+      <button
+        className="absolute xl:top-2/4 xl:right-24 h-7 md:right-0 sm:bottom-24 md:top-52 sm:left-48"
+        onClick={() => UpdateIndex(activeIndex + 1)}
+      >
+        <FontAwesomeIcon icon={faArrowRight} className="h-7" />
       </button>
     </div>
-  )
+  );
 }
 
-function CarouselItem({ children, width }) {
+function CarouselItem({children, width}) {
   return (
-    <div className="inline-flex sm:whitespace-normal z-[1]" style={{ width }}>
+    <div className="inline-flex sm:whitespace-normal z-[1]" style={{width}}>
       {children}
     </div>
-  )
+  );
 }
 
 function Socials() {
   return (
     <div className="mt-24 flex">
-      <Button label={<FontAwesomeIcon icon={faFacebookF} className="w-3 text-gray-900" />} url="/" className="px-0 w-5 h-6 rounded-none bg-transparent hover:bg-transparent" />
-      <Button label={<FontAwesomeIcon icon={faTwitter} className="w-5 text-gray-900" />} url="/" className="w-5 h-6 rounded-none bg-transparent hover:bg-transparent" />
-      <Button label={<FontAwesomeIcon icon={faPinterest} className="w-5 text-gray-900" />} url="/" className="w-5 h-6 rounded-none bg-transparent hover:bg-transparent" />
-      <Button label={<FontAwesomeIcon icon={faInstagram} className="w-5 text-gray-900" />} url="/" className="w-5 h-6 rounded-none bg-transparent hover:bg-transparent" />
-    </div >
-  )
+      <Button
+        label={
+          <FontAwesomeIcon icon={faFacebookF} className="w-3 text-gray-900" />
+        }
+        url="/"
+        className="px-0 w-5 h-6 rounded-none bg-transparent hover:bg-transparent"
+      />
+      <Button
+        label={
+          <FontAwesomeIcon icon={faTwitter} className="w-5 text-gray-900" />
+        }
+        url="/"
+        className="w-5 h-6 rounded-none bg-transparent hover:bg-transparent"
+      />
+      <Button
+        label={
+          <FontAwesomeIcon icon={faPinterest} className="w-5 text-gray-900" />
+        }
+        url="/"
+        className="w-5 h-6 rounded-none bg-transparent hover:bg-transparent"
+      />
+      <Button
+        label={
+          <FontAwesomeIcon icon={faInstagram} className="w-5 text-gray-900" />
+        }
+        url="/"
+        className="w-5 h-6 rounded-none bg-transparent hover:bg-transparent"
+      />
+    </div>
+  );
 }

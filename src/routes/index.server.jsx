@@ -18,7 +18,7 @@ import Hero from '../components/Home/Hero/Hero.client';
 
 export default function Index({country = {isoCode: 'US'}}) {
   return (
-    <Layout hero={<Hero/>}>
+    <Layout hero={<Hero />}>
       <div className="mb-12">
         {/* <Welcome /> */}
         {/* <Suspense fallback={<BoxFallback />}>
