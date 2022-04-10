@@ -70,8 +70,6 @@ function Carousel({ children }) {
           })}
         </div>
       </div>
-      {/* <div className="absolute xl:top-2/4 xl:left-32 xl:w-5/6 sm:w-52 sm:left-4 sm:bottom-1/4 md:top-5 md:w-11/12">
-      </div> */}
       <button className="absolute xl:top-2/4 xl:left-24 h-7 md:left-0 sm:bottom-24 md:top-52 sm:left-6" onClick={() => UpdateIndex(activeIndex - 1)}>
         <FontAwesomeIcon icon={faArrowLeft} className="h-7" />
       </button>
