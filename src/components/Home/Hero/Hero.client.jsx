@@ -8,16 +8,13 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import React, {useEffect, useState} from 'react';
 import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+import {backgroundImages} from './HeroSliderData';
 
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [backgroundImage, setBackgroundImage] = useState('');
 
   useEffect(() => {
-    const backgroundImages = [
-      "url('https://cdn.shopify.com/s/files/1/0610/1870/1985/files/hero-1_jpg.webp?v=1649522164')",
-      "url('https://cdn.shopify.com/s/files/1/0610/1870/1985/files/hero-2_jpg.webp?v=1649551282')",
-    ];
     setBackgroundImage(backgroundImages[activeIndex]);
   }, [activeIndex]);
 
