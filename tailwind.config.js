@@ -5,6 +5,7 @@ module.exports = {
       sm: '420px',
       md: '768px',
       xl: '1280px',
+      desktop: '1919px',
     },
     flex: {
       half: '50%',

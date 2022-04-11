@@ -142,7 +142,7 @@ function CarouselArrows({childrenNodes, activeIndex, setActiveIndex}) {
 
 function Socials() {
   return (
-    <div className="mt-16 pb-8 sm:mx-4 md:mx-10 xl:mx-96 flex">
+    <div className="mt-16 pb-8 sm:mx-4 md:mx-10 xl:mx-48 desktop:mx-96 flex">
       <Button
         label={
           <FontAwesomeIcon icon={faFacebookF} className="w-3 text-gray-900" />
