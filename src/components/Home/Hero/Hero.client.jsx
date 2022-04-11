@@ -9,6 +9,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import {faArrowRight, faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import {backgroundImages} from './HeroSliderData';
+import {request, gql} from 'graphql-request';
 
 export default function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -17,6 +18,34 @@ export default function Hero() {
   useEffect(() => {
     setBackgroundImage(backgroundImages[activeIndex]);
   }, [activeIndex]);
+
+  const GetHeroComponentInfo = gql`
+    {
+      seoHeroSliders {
+        id
+        seoHeroComponents {
+          collectionHeroName
+          heroHeadingName
+          heroImages {
+            id
+            size
+            url
+          }
+          textLink
+        }
+      }
+    }
+  `;
+
+  request({
+    url: 'https://api-sa-east-1.graphcms.com/v2/cl1utsbcyc5mf01xk019rfpx0/master',
+    document: GetHeroComponentInfo,
+    requestHeaders: {
+      Authorization: `Bearer ${process.env.GRAPH_CMS_TOKEN}`,
+    },
+  })
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
 
   return (
     <div
