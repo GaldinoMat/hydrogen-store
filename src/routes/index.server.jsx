@@ -19,15 +19,13 @@ import Hero from '../components/Home/Hero/Hero.server';
 export default function Index({country = {isoCode: 'US'}}) {
   return (
     <Layout hero={<Hero />}>
-      <div className="mb-12">
-        {/* <Welcome /> */}
-        {/* <Suspense fallback={<BoxFallback />}>
-          <FeaturedProductsBox country={country} />
-        </Suspense>
-        <Suspense fallback={<BoxFallback />}>
-          <FeaturedCollectionBox country={country} />
-        </Suspense> */}
-      </div>
+      <Suspense fallback={<BoxFallback />}>
+        <FeaturedCollectionBox country={country} />
+      </Suspense>
+      <Suspense fallback={<BoxFallback />}>
+        <FeaturedProductsBox country={country} />
+      </Suspense>
+      <div className="mb-12"></div>
     </Layout>
   );
 }
@@ -131,10 +129,10 @@ function FeaturedCollectionBox({country}) {
   });
 
   const collections = data ? flattenConnection(data.collections) : [];
-  const featuredCollection =
-    collections && collections.length > 1 ? collections[1] : collections[0];
+  const featuredCollections =
+    collections && collections.length > 1 ? collections : collections[0];
 
-  return <FeaturedCollection collection={featuredCollection} />;
+  return <FeaturedCollection collections={featuredCollections} />;
 }
 const SEO_QUERY = gql`
   query homeShopInfo {
@@ -147,7 +145,7 @@ const SEO_QUERY = gql`
 const QUERY = gql`
   query indexContent($country: CountryCode, $language: LanguageCode)
   @inContext(country: $country, language: $language) {
-    collections(first: 2) {
+    collections(first: 3) {
       edges {
         node {
           handle
