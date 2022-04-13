@@ -6,10 +6,10 @@ import {useMoney} from '@shopify/hydrogen/client';
 export default function MoneyPrice({money}) {
   const {currencyCode, currencyNarrowSymbol, amount} = useMoney(money);
   return (
-    <span className="text-black text-md">
+    <h5 className="text-black text-lg font-bold">
       {currencyCode}
       {currencyNarrowSymbol}
       {amount}
-    </span>
+    </h5>
   );
 }
