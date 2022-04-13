@@ -1,4 +1,4 @@
-import {Image, Link, log} from '@shopify/hydrogen';
+import {Image, Link} from '@shopify/hydrogen';
 import {Suspense} from 'react';
 
 /**

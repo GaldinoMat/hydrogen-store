@@ -1,10 +1,4 @@
-import {
-  flattenConnection,
-  Link,
-  log,
-  useShop,
-  useShopQuery,
-} from '@shopify/hydrogen';
+import {flattenConnection, useShop, useShopQuery} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 import ProductCard from '../../ProductCard';
 
@@ -38,24 +32,22 @@ export default function FeaturedProductsBox({country}) {
   const uniqueCollections = [...new Set(collections)].reverse();
 
   return (
-    <div className="bg-white sm:px-4">
+    <div className="bg-white sm:px-4 xl:max-w-[1170px] mx-auto">
       {featuredProductsCollection ? (
         <>
-          <div className="flex items-center justify-center mb-11 text-md font-bold">
+          <div className="flex items-center sm:justify-between md:justify-center mb-11 text-md font-bold">
             {uniqueCollections.map((uniqueCollection) => (
               <span
                 key={uniqueCollection}
-                className="text-black text-xl sm:mr-4"
+                className="text-black text-xl sm:mr-4 md:mr-[88px] sm:last:mr-0 md:last:mr-0"
               >
                 {uniqueCollection}
               </span>
             ))}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-8">
+          <div className="flex sm:flex-col md:flex-row flex-wrap mb-8">
             {featuredProducts.map((product) => (
-              <div key={product.id}>
-                <ProductCard product={product} />
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </>
