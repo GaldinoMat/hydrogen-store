@@ -1,6 +1,6 @@
 import {flattenConnection, useShop, useShopQuery} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
-import ProductCard from '../../ProductCard';
+import FeaturedProductsMap from './FeaturedProductsMap.client';
 
 export default function FeaturedProductsBox({country}) {
   const {languageCode} = useShop();
@@ -22,10 +22,15 @@ export default function FeaturedProductsBox({country}) {
 
   const collections = featuredProducts
     .map((product) => {
-      return product.variants;
+      return flattenConnection(product.variants);
     })
+    .flat()
     .map((variant) => {
-      return variant.edges[0].node.product.collections.edges[0].node.title;
+      return flattenConnection(variant.product.collections);
+    })
+    .flat()
+    .map((element) => {
+      return element.title;
     });
 
   collections.push(collection.title);
@@ -34,23 +39,10 @@ export default function FeaturedProductsBox({country}) {
   return (
     <div className="bg-white sm:px-4 xl:max-w-[1170px] mx-auto">
       {featuredProductsCollection ? (
-        <>
-          <div className="flex items-center sm:justify-between md:justify-center mb-11 text-md font-bold">
-            {uniqueCollections.map((uniqueCollection) => (
-              <span
-                key={uniqueCollection}
-                className="text-black text-xl sm:mr-4 md:mr-[88px] sm:last:mr-0 md:last:mr-0"
-              >
-                {uniqueCollection}
-              </span>
-            ))}
-          </div>
-          <div className="flex sm:flex-col md:flex-row flex-wrap mb-8">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </>
+        <FeaturedProductsMap
+          uniqueCollections={uniqueCollections}
+          featuredProducts={featuredProducts}
+        />
       ) : null}
     </div>
   );

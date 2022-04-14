@@ -2,7 +2,6 @@ import {
   useShop,
   useShopQuery,
   flattenConnection,
-  Link,
   Seo,
   CacheDays,
 } from '@shopify/hydrogen';
@@ -10,18 +9,14 @@ import gql from 'graphql-tag';
 
 import Layout from '../components/Layout.server';
 import FeaturedCollection from '../components/Home/Collection Display/FeaturedCollection';
-import ProductCard from '../components/ProductCard';
-import Welcome from '../components/Welcome.server';
 import {Suspense} from 'react';
 import {log} from '@shopify/hydrogen';
-import Hero from '../components/Home/Hero/Hero.server';
+import Hero from '../components/Home/Hero/Hero';
 import FeaturedProductsBox from '../components/Home/Featured Products Box/FeaturedProductsBox.server';
 
 export default function Index({country = {isoCode: 'US'}}) {
   return (
-    <Layout
-    // hero={<Hero />}
-    >
+    <Layout hero={<Hero />}>
       <Suspense fallback={<BoxFallback />}>
         <FeaturedCollectionBox country={country} />
       </Suspense>

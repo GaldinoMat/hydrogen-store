@@ -22,7 +22,7 @@ export default function ProductCard({product}) {
   return (
     <div className="text-md md:px-4 mb-4 md:mb-10 relative group md:max-w-1/2 md:flex-half xl:max-w-[25%]">
       <Link to={`/products/${product.handle}`}>
-        <div className="mb-10 xl:mb-0 relative flex items-center justify-center overflow-hidden object-cover h-96">
+        <div className="mb-10 xl:mb-0 xl:h-64 relative flex items-center justify-center overflow-hidden object-cover h-96">
           {selectedVariant.image ? (
             <Image
               className="bg-white absolute xl:h-64 w-full h-full transition-all duration-500 ease-in-out transform bg-center bg-cover object-center object-contain"
