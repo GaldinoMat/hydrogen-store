@@ -4,19 +4,21 @@ import {
   flattenConnection,
   Seo,
   CacheDays,
-} from '@shopify/hydrogen';
-import gql from 'graphql-tag';
+} from "@shopify/hydrogen";
+import gql from "graphql-tag";
 
-import Layout from '../components/Layout.server';
-import FeaturedCollection from '../components/Home/Collection Display/FeaturedCollection';
-import {Suspense} from 'react';
-import {log} from '@shopify/hydrogen';
-import Hero from '../components/Home/Hero/Hero';
-import FeaturedProductsBox from '../components/Home/Featured Products Box/FeaturedProductsBox.server';
+import Layout from "../components/Layout.server";
+import FeaturedCollection from "../components/Home/Collection Display/FeaturedCollection";
+import { Suspense } from "react";
+import { log } from "@shopify/hydrogen";
+import Hero from "../components/Home/Hero/Hero";
+import FeaturedProductsBox from "../components/Home/Featured Products Box/FeaturedProductsBox.server";
 
-export default function Index({country = {isoCode: 'US'}}) {
+export default function Index({ country = { isoCode: "US" } }) {
   return (
-    <Layout hero={<Hero />}>
+    <Layout
+    // hero={<Hero />}
+    >
       <Suspense fallback={<BoxFallback />}>
         <FeaturedCollectionBox country={country} />
       </Suspense>
@@ -31,7 +33,7 @@ export default function Index({country = {isoCode: 'US'}}) {
 function SeoForHomepage() {
   const {
     data: {
-      shop: {title, description},
+      shop: { title, description },
     },
   } = useShopQuery({
     query: SEO_QUERY,
@@ -39,7 +41,7 @@ function SeoForHomepage() {
     preload: true,
   });
 
-  const {data} = useShopQuery({query: QUERY});
+  const { data } = useShopQuery({ query: QUERY });
 
   log.debug(JSON.stringify(data, null, 2));
 
@@ -58,10 +60,10 @@ function BoxFallback() {
   return <div className="bg-white p-12 shadow-xl rounded-xl mb-10 h-40"></div>;
 }
 
-function FeaturedCollectionBox({country}) {
-  const {languageCode} = useShop();
+function FeaturedCollectionBox({ country }) {
+  const { languageCode } = useShop();
 
-  const {data} = useShopQuery({
+  const { data } = useShopQuery({
     query: QUERY,
     variables: {
       country: country.isoCode,

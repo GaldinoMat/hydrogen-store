@@ -3,12 +3,12 @@ import {Image, Link} from '@shopify/hydrogen';
 
 import MoneyCompareAtPrice from './MoneyCompareAtPrice.client';
 import MoneyPrice from './MoneyPrice.client';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faStar, faHeart} from '@fortawesome/free-regular-svg-icons';
-import {
-  faMagnifyingGlass,
-  faArrowsLeftRight,
-} from '@fortawesome/free-solid-svg-icons';
+// import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+// import {faStar, faHeart} from '@fortawesome/free-regular-svg-icons';
+// import {
+//   faMagnifyingGlass,
+//   faArrowsLeftRight,
+// } from '@fortawesome/free-solid-svg-icons';
 /**
  * A shared component that displays a single product to allow buyers to quickly identify a particular item of interest
  */
@@ -34,7 +34,7 @@ export default function ProductCard({product}) {
               Out of stock
             </div>
           )}
-          <ul className="absolute top-5 -right-[200px] group-hover:right-3 transition-all duration-700">
+          {/* <ul className="absolute top-5 -right-[200px] group-hover:right-3 transition-all duration-700">
             <li className="mb-[10px] p-[10px] bg-white">
               <FontAwesomeIcon className="w-4" icon={faHeart} />
             </li>
@@ -44,7 +44,7 @@ export default function ProductCard({product}) {
             <li className="mb-[10px] p-[10px] bg-white">
               <FontAwesomeIcon className="w-4" icon={faMagnifyingGlass} />
             </li>
-          </ul>
+          </ul> */}
         </div>
         <div className="pt-7 relative">
           <h6 className="text-black font-semibold text-base mt-1 group-hover:opacity-0 transition-all duration-300">
@@ -58,13 +58,13 @@ export default function ProductCard({product}) {
               {product.vendor}
             </p>
           )}
-          <div className="flex mb-[6px]">
+          {/* <div className="flex mb-[6px]">
             <FontAwesomeIcon className="w-4" icon={faStar} />
             <FontAwesomeIcon className="w-4" icon={faStar} />
             <FontAwesomeIcon className="w-4" icon={faStar} />
             <FontAwesomeIcon className="w-4" icon={faStar} />
             <FontAwesomeIcon className="w-4" icon={faStar} />
-          </div>
+          </div> */}
           <div className="flex ">
             {selectedVariant.compareAtPriceV2 && (
               <Suspense fallback={null}>
