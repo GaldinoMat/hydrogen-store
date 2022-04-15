@@ -15,12 +15,13 @@ export default function FeaturedProductsMap({
     <Suspense>
       <div className="flex items-center sm:justify-between md:justify-center mb-11 text-md font-bold">
         {uniqueCollections.map((uniqueCollection) => (
-          <span
+          <button
+            onClick={() => console.log('hello')}
             key={uniqueCollection}
-            className="text-black text-xl sm:mr-4 md:mr-[88px] sm:last:mr-0 md:last:mr-0"
+            className="text-black text-xl font-bold sm:mr-4 md:mr-[88px] sm:last:mr-0 md:last:mr-0"
           >
             {uniqueCollection}
-          </span>
+          </button>
         ))}
       </div>
       <Suspense>
