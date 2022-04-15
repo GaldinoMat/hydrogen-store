@@ -1,6 +1,7 @@
 import {flattenConnection} from '@shopify/hydrogen';
 import {Suspense, useCallback, useEffect, useState} from 'react';
 import ProductCard from '../../ProductCard';
+import {motion, AnimatePresence} from 'framer-motion';
 
 export default function FeaturedProductsMap({
   featuredProducts,
@@ -56,11 +57,19 @@ export default function FeaturedProductsMap({
         ))}
       </div>
       <Suspense>
-        <div className="flex sm:flex-col md:flex-row flex-wrap mb-8">
-          {filteredCollections.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        <motion.div
+          layout
+          animate={{opacity: 1, scale: 1}}
+          initial={{opacity: 1, scale: 1}}
+          exit={{opacity: 0, scale: 0}}
+          className="flex sm:flex-col md:flex-row flex-wrap mb-8"
+        >
+          <AnimatePresence>
+            {filteredCollections.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </Suspense>
     </Suspense>
   );

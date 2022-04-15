@@ -9,7 +9,7 @@ import {
   faMagnifyingGlass,
   faArrowsLeftRight,
 } from '@fortawesome/free-solid-svg-icons';
-
+import {motion} from 'framer-motion';
 /**
  * A shared component that displays a single product to allow buyers to quickly identify a particular item of interest
  */
@@ -21,7 +21,10 @@ export default function ProductCard({product}) {
   }
 
   return (
-    <div className="text-md md:px-4 mb-4 md:mb-10 relative group md:max-w-1/2 md:flex-half xl:max-w-[25%]">
+    <motion.div
+      layout
+      className="text-md md:px-4 mb-4 md:mb-10 relative group md:max-w-1/2 md:flex-half xl:max-w-[25%]"
+    >
       <Link to={`/products/${product.handle}`}>
         <div className="mb-10 xl:mb-0 xl:h-64 relative flex items-center justify-center overflow-hidden object-cover h-96">
           {selectedVariant.image ? (
@@ -78,6 +81,6 @@ export default function ProductCard({product}) {
           </div>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 }
