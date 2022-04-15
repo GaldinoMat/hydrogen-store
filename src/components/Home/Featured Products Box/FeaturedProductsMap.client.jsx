@@ -1,5 +1,5 @@
 import {flattenConnection} from '@shopify/hydrogen';
-import {Suspense, useCallback, useEffect, useState} from 'react';
+import {Suspense, useEffect, useState} from 'react';
 import ProductCard from '../../ProductCard';
 import {motion, AnimatePresence} from 'framer-motion';
 
@@ -11,14 +11,13 @@ export default function FeaturedProductsMap({
   const [filteredCollections, setFilteredCollections] = useState([]);
   const [activeCollections, setActiveCollections] = useState('SALE');
 
-  const setFilters = () => {
-    setCollections(featuredProducts);
-    setFilteredCollections(featuredProducts);
-  };
-
   useEffect(() => {
+    const setFilters = () => {
+      setCollections(featuredProducts);
+      setFilteredCollections(featuredProducts);
+    };
     setFilters();
-  }, []);
+  }, [featuredProducts]);
 
   useEffect(() => {
     if (activeCollections === 'SALE') {
@@ -44,13 +43,17 @@ export default function FeaturedProductsMap({
   };
 
   return (
-    <Suspense>
+    <>
       <div className="flex items-center sm:justify-between md:justify-center mb-11 text-md font-bold">
         {uniqueCollections.map((uniqueCollection) => (
           <button
             onClick={(e) => handleSelectCollections(e)}
             key={uniqueCollection}
-            className="text-black text-xl font-bold sm:mr-4 md:mr-[88px] sm:last:mr-0 md:last:mr-0"
+            className={
+              activeCollections === uniqueCollection
+                ? 'text-black text-xl font-bold sm:mr-4 md:mr-[88px] sm:last:mr-0 md:last:mr-0'
+                : 'text-gray-400 text-xl font-bold sm:mr-4 md:mr-[88px] sm:last:mr-0 md:last:mr-0'
+            }
           >
             {uniqueCollection}
           </button>
@@ -71,6 +74,6 @@ export default function FeaturedProductsMap({
           </AnimatePresence>
         </motion.div>
       </Suspense>
-    </Suspense>
+    </>
   );
 }
