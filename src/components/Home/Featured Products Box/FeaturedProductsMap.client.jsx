@@ -1,22 +1,53 @@
-import {Suspense, useEffect, useState} from 'react';
+import {flattenConnection} from '@shopify/hydrogen';
+import {Suspense, useCallback, useEffect, useState} from 'react';
 import ProductCard from '../../ProductCard';
 
 export default function FeaturedProductsMap({
   featuredProducts,
   uniqueCollections,
 }) {
-  const [test, setTest] = useState('test');
+  const [collections, setCollections] = useState([]);
+  const [filteredCollections, setFilteredCollections] = useState([]);
+  const [activeCollections, setActiveCollections] = useState('SALE');
+
+  const setFilters = () => {
+    setCollections(featuredProducts);
+    setFilteredCollections(featuredProducts);
+  };
 
   useEffect(() => {
-    console.log('hello');
+    setFilters();
   }, []);
+
+  useEffect(() => {
+    if (activeCollections === 'SALE') {
+      setFilteredCollections(collections);
+      return;
+    }
+
+    const filteredProducts = collections.filter((collection) => {
+      const filteredVariants = flattenConnection(collection.variants);
+
+      const filteredCollectionsTitle = flattenConnection(
+        filteredVariants[0].product.collections,
+      );
+
+      return filteredCollectionsTitle[0].title === activeCollections;
+    });
+
+    setFilteredCollections(filteredProducts);
+  }, [activeCollections, collections]);
+
+  const handleSelectCollections = (e) => {
+    setActiveCollections(e.target.textContent);
+  };
 
   return (
     <Suspense>
       <div className="flex items-center sm:justify-between md:justify-center mb-11 text-md font-bold">
         {uniqueCollections.map((uniqueCollection) => (
           <button
-            onClick={() => console.log('hello')}
+            onClick={(e) => handleSelectCollections(e)}
             key={uniqueCollection}
             className="text-black text-xl font-bold sm:mr-4 md:mr-[88px] sm:last:mr-0 md:last:mr-0"
           >
@@ -26,7 +57,7 @@ export default function FeaturedProductsMap({
       </div>
       <Suspense>
         <div className="flex sm:flex-col md:flex-row flex-wrap mb-8">
-          {featuredProducts.map((product) => (
+          {filteredCollections.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
