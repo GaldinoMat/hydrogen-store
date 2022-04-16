@@ -1,5 +1,5 @@
-import {Image, Link} from '@shopify/hydrogen';
 import {Suspense} from 'react';
+import CollectionElement from './Collection Element/CollectionElement';
 
 /**
  * A shared component that defines a single featured collection to display on a storefront
@@ -42,55 +42,5 @@ export default function FeaturedCollection({collections}) {
         })}
       </div>
     </Suspense>
-  );
-}
-
-function CollectionElement({collection, isAbsolute, order}) {
-  return (
-    <div
-      className={
-        order === '1'
-          ? 'sm:px-4 sm:mt-10 flex sm:flex-col md:relative items-center bg-white overflow-hidden md:w-full md:flex xl:flex-[58.333333%] xl:max-w-[58.333333%] xl:ml-[33%]'
-          : order === '2'
-          ? 'sm:px-4 sm:mt-10 xl:mt-24 flex sm:flex-col md:relative items-center bg-white overflow-hidden md:w-full md:flex xl:flex-[58.333333%] xl:max-w-[58.333333%]'
-          : 'sm:px-4 sm:mt-10 flex sm:flex-col md:relative items-center bg-white overflow-hidden md:w-full md:flex xl:flex-[41.666667%] xl:max-w-[41.666667%] xl:-mt-20'
-      }
-    >
-      {isAbsolute ? (
-        <Image className="md:float-right md:self-end" data={collection.image} />
-      ) : (
-        <Image
-          className="md:float-right md:self-start"
-          data={collection.image}
-        />
-      )}
-      {isAbsolute ? (
-        <div className="w-full sm:pt-6 lg:py-0 md:absolute md:bottom-1/2 md:left-[25px]">
-          <h2 className="text-black text-4xl font-bold sm:mb-3">
-            {collection.title}
-          </h2>
-          <Link
-            to={`/collections/${collection.handle}`}
-            className="inline-block bg-transparent text-black text-sm font-bold tracking-widest uppercase
-          border-b-2 border-black hover:border-red-900"
-          >
-            Shop Now
-          </Link>
-        </div>
-      ) : (
-        <div className="w-full sm:pt-6 lg:py-0 md:relative">
-          <h2 className="text-black text-4xl font-bold sm:mb-3">
-            {collection.title}
-          </h2>
-          <Link
-            to={`/collections/${collection.handle}`}
-            className="inline-block bg-transparent text-black text-sm font-bold tracking-widest uppercase
-          border-b-2 border-black hover:border-red-900"
-          >
-            Shop Now
-          </Link>
-        </div>
-      )}
-    </div>
   );
 }
