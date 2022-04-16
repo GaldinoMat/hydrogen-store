@@ -22,6 +22,7 @@ export default function ProductCard({product}) {
 
   return (
     <motion.div
+      exit={{opacity: 0, scale: 0.9}}
       layout
       className="text-md md:px-4 mb-4 md:mb-10 relative group md:max-w-1/2 md:flex-half xl:max-w-[25%]"
     >
