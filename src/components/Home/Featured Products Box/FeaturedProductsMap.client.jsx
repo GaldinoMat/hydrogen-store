@@ -12,11 +12,8 @@ export default function FeaturedProductsMap({
   const [activeCollections, setActiveCollections] = useState('SALE');
 
   useEffect(() => {
-    const setFilters = () => {
-      setCollections(featuredProducts);
-      setFilteredCollections(featuredProducts);
-    };
-    setFilters();
+    setCollections(featuredProducts);
+    setFilteredCollections(featuredProducts);
   }, [featuredProducts]);
 
   useEffect(() => {
