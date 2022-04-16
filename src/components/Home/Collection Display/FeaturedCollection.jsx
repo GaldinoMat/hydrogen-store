@@ -1,4 +1,4 @@
-import {Image, Link, log} from '@shopify/hydrogen';
+import {Image, Link} from '@shopify/hydrogen';
 import {Suspense} from 'react';
 
 /**
@@ -7,7 +7,7 @@ import {Suspense} from 'react';
 export default function FeaturedCollection({collections}) {
   return (
     <Suspense>
-      <div className="flex sm:flex-col md:flex-row md:flex-wrap sm:items-center sm:pt-24 xl:max-w-[1170px] xl:mx-auto xl:px-4">
+      <div className="flex sm:flex-col md:flex-row md:flex-wrap sm:items-center sm:pt-24 sm:pb-16 xl:max-w-[1170px] xl:mx-auto xl:px-4">
         {collections.map((collection) => {
           if (collections.indexOf(collection) % 2 === 0) {
             if (collections.indexOf(collection) === 0) {
@@ -72,7 +72,7 @@ function CollectionElement({collection, isAbsolute, order}) {
           <Link
             to={`/collections/${collection.handle}`}
             className="inline-block bg-transparent text-black text-sm font-bold tracking-widest uppercase
-          border-b-2 border-black"
+          border-b-2 border-black hover:border-red-900"
           >
             Shop Now
           </Link>
@@ -85,7 +85,7 @@ function CollectionElement({collection, isAbsolute, order}) {
           <Link
             to={`/collections/${collection.handle}`}
             className="inline-block bg-transparent text-black text-sm font-bold tracking-widest uppercase
-          border-b-2 border-black"
+          border-b-2 border-black hover:border-red-900"
           >
             Shop Now
           </Link>
