@@ -5,7 +5,7 @@ import {Link} from '@shopify/hydrogen/client';
  */
 export default function Navigation({collections}) {
   return (
-    <nav className="hidden lg:block text-center">
+    <nav className="hidden xl:block text-center">
       <ul className="md:flex items-center justify-center">
         {collections.map((collection) => (
           <li key={collection.id}>

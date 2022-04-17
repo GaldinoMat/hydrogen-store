@@ -27,16 +27,29 @@ export default function Layout({children, hero}) {
     cache: CacheHours(),
     preload: '*',
   });
+
+  const {data: menudata} = useShopQuery({
+    query: MENUQUERY,
+    variables: {
+      menuName: 'main-menu',
+    },
+  });
+
   const collections = data ? flattenConnection(data.collections) : null;
   const products = data ? flattenConnection(data.products) : null;
   const storeName = data ? data.shop.name : '';
 
+  const menuItems = menudata ? menudata.menu.items : [];
   return (
     <LocalizationProvider preload="*">
       <div className="min-h-screen max-w-screen text-gray-700 font-site">
         {/* TODO: Find out why Suspense needs to be here to prevent hydration errors. */}
         <Suspense fallback={null}>
-          <Header collections={collections} storeName={storeName} />
+          <Header
+            collections={collections}
+            storeName={storeName}
+            menuItems={menuItems}
+          />
           <Cart />
         </Suspense>
         <main role="main" id="mainContent" className="relative h-screen">
@@ -78,6 +91,19 @@ const QUERY = gql`
         node {
           handle
         }
+      }
+    }
+  }
+`;
+
+const MENUQUERY = gql`
+  query menucontext($menuName: String!) {
+    menu(handle: $menuName) {
+      items {
+        id
+        tags
+        title
+        url
       }
     }
   }
