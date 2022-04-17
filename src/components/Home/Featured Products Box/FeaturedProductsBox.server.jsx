@@ -1,6 +1,6 @@
 import {flattenConnection, useShop, useShopQuery} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
-import FeaturedProductsMap from './FeaturedProductsMap.client';
+import FeaturedProducts from './FeaturedProducts.client';
 
 export default function FeaturedProductsBox({country}) {
   const {languageCode} = useShop();
@@ -39,7 +39,7 @@ export default function FeaturedProductsBox({country}) {
   return (
     <div className="bg-white sm:px-4 xl:max-w-[1170px] mx-auto">
       {featuredProductsCollection ? (
-        <FeaturedProductsMap
+        <FeaturedProducts
           uniqueCollections={uniqueCollections}
           featuredProducts={featuredProducts}
         />

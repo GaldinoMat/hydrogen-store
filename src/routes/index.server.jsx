@@ -11,7 +11,7 @@ import Layout from '../components/Layout.server';
 import FeaturedCollection from '../components/Home/Collection Display/FeaturedCollection';
 import {Suspense} from 'react';
 import {log} from '@shopify/hydrogen';
-import Hero from '../components/Home/Hero/Hero';
+import Hero from '../components/Home/Hero/Hero.server';
 import FeaturedProductsBox from '../components/Home/Featured Products Box/FeaturedProductsBox.server';
 
 export default function Index({country = {isoCode: 'US'}}) {

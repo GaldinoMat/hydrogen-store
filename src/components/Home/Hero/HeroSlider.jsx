@@ -1,6 +1,6 @@
 import Button from '../../Button.client';
 
-export default function HeroComponent({
+export default function HeroSlider({
   collectionHeroName,
   heroHeadingName,
   heroSEOText,
