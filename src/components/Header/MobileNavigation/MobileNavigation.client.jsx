@@ -1,9 +1,9 @@
 import {Fragment, useState} from 'react';
-import {Link} from '@shopify/hydrogen/client';
 import {FocusTrap} from '@headlessui/react';
-import MobileCountrySelector from '../MobileCountrySelector.client';
-import {OpenIconInner, OpenIcon} from '../OpenIcon';
-import {MobileHeaderIcons} from './HeaderIcons';
+import {OpenIcon} from '../../OpenIcon';
+import {MobileHeaderIcons} from '../HeaderIcons';
+import MobileNavigationTopMenu from './MobileNavigationTopMenu';
+import MobileNavigationSubMenu from './MobileNavigationSubMenu';
 
 /**
  * A client component that defines the navigation for a mobile storefront
@@ -25,55 +25,13 @@ export default function MobileNavigation({isOpen, setIsOpen, menuItems}) {
         </button>
         {isOpen ? (
           <div className="fixed w-[300px] -left-0 top-0 h-screen z-10 bg-gray-50 px-4 pt-[50px] pr-5 pb-[30px] pl-[30px]">
-            <ul className="flex items-center justify-evenly text-xs mb-8">
-              <li className="min-w-[60px] text-[13px]">
-                <Link
-                  className="group py-5 text-black uppercase"
-                  to={`/`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  Sign In
-                </Link>
-              </li>
-              <li className="min-w-[60px] text-[13px] uppercase">
-                <Link
-                  className="group py-5 text-black"
-                  to={`/`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  FAQS
-                </Link>
-              </li>
-              <li className="min-w-[60px] text-[13px] uppercase">
-                <MobileCountrySelector />
-              </li>
-            </ul>
+            <MobileNavigationTopMenu setIsOpen={setIsOpen} />
             <MobileHeaderIcons />
-            <div className="w-full bg-gray-700 p-[5px] flex items-end flex-col transition-all">
-              <button
-                onClick={() => setInsideMenuOpen(!insideMenuOpen)}
-                className="bg-gray-900 text-white p-2 rounded flex items-center mx-[5px] my-[6px]"
-              >
-                <p className="mr-1">MENU</p>
-                <OpenIconInner />
-              </button>
-              <ul
-                className={
-                  insideMenuOpen
-                    ? 'w-full items-start flex-col pl-5 transition-all h-full flex'
-                    : 'w-full pl-5 h-0 hidden'
-                }
-              >
-                {menuItems.map((item) => (
-                  <li
-                    className="text-white px-[10px] py-[5px] my-[2px] mx-[5px]"
-                    key={item.id}
-                  >
-                    <Link to={item.url}>{item.title}</Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <MobileNavigationSubMenu
+              insideMenuOpen={insideMenuOpen}
+              menuItems={menuItems}
+              setInsideMenuOpen={setInsideMenuOpen}
+            />
             <div>
               <p className="text-black text-[15px] font-normal text-left">
                 Free shipping, 30-day return or refund guarantee.
