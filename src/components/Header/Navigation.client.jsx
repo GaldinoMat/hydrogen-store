@@ -11,7 +11,7 @@ export default function Navigation({menuItems}) {
           <li key={item.id}>
             <Link
               to={`${item.url}`}
-              className="block mr-[10px] xl:mr-11 hover:opacity-80 md:text-[18px] font-semibold"
+              className="block mr-[10px] xl:mr-11 hover:opacity-80 md:text-[15px] xl:text-lg font-semibold"
             >
               {item.title}
             </Link>

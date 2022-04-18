@@ -1,11 +1,9 @@
-import {Fragment, useEffect, useState} from 'react';
+import {Fragment, useState} from 'react';
 import {Link} from '@shopify/hydrogen/client';
 import {FocusTrap} from '@headlessui/react';
-import MobileCountrySelector from './MobileCountrySelector.client';
-import OpenIcon from './OpenIcon';
-import {MobileHeaderIcons} from './Header/HeaderIcons';
-
-let scrollPosition = 0;
+import MobileCountrySelector from '../MobileCountrySelector.client';
+import {OpenIconInner, OpenIcon} from '../OpenIcon';
+import {MobileHeaderIcons} from './HeaderIcons';
 
 /**
  * A client component that defines the navigation for a mobile storefront
@@ -13,16 +11,6 @@ let scrollPosition = 0;
 export default function MobileNavigation({isOpen, setIsOpen, menuItems}) {
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
   const [insideMenuOpen, setInsideMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      scrollPosition = window.scrollY;
-      document.body.style.position = 'fixed';
-    } else if (document.body.style.position) {
-      document.body.style.position = '';
-      window.scrollTo(0, scrollPosition);
-    }
-  }, [isOpen]);
 
   return (
     <div className="border-[1px] w-9 h-9 border-black md:hidden flex items-center justify-center">
@@ -67,7 +55,7 @@ export default function MobileNavigation({isOpen, setIsOpen, menuItems}) {
                 className="bg-gray-900 text-white p-2 rounded flex items-center mx-[5px] my-[6px]"
               >
                 <p className="mr-1">MENU</p>
-                <OpenIcon />
+                <OpenIconInner />
               </button>
               <ul
                 className={

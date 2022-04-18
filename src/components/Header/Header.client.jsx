@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import {Link, Image} from '@shopify/hydrogen/client';
-import {useCartUI} from './CartUIProvider.client';
-import CountrySelector from './CountrySelector.client';
+import {useCartUI} from '../CartUIProvider.client';
+import CountrySelector from '../CountrySelector.client';
 import Navigation from './Navigation.client';
 import MobileNavigation from './MobileNavigation.client';
-import {HeaderIcons} from './Header/HeaderIcons';
+import {HeaderIcons} from './HeaderIcons';
 
 /**
  * A client component that specifies the content of the header on the website
@@ -22,12 +22,9 @@ export default function Header({collections, storeName, menuItems}) {
   }, [isCartOpen]);
 
   return (
-    <header
-      className="h-[85px] xl:flex xl:items-center xl:justify-center"
-      role="banner"
-    >
+    <header className="h-[85px] w-screen xl:flex xl:items-center xl:justify-center">
       <div
-        className={`fixed z-20 h-[85px] w-full xl:max-w-[1170px] border-b border-gray-200 px-4 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto bg-white ${
+        className={`relative z-20 h-[85px] w-full xl:max-w-[1170px] px-4 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto bg-white ${
           isMobileNavOpen ? '' : 'bg-opacity-95'
         }`}
       >
