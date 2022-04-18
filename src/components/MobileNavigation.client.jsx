@@ -1,21 +1,16 @@
 import {Fragment, useEffect, useState} from 'react';
 import {Link} from '@shopify/hydrogen/client';
 import {FocusTrap} from '@headlessui/react';
-
 import MobileCountrySelector from './MobileCountrySelector.client';
 import OpenIcon from './OpenIcon';
+import {MobileHeaderIcons} from './Header/HeaderIcons';
 
 let scrollPosition = 0;
 
 /**
  * A client component that defines the navigation for a mobile storefront
  */
-export default function MobileNavigation({
-  collections,
-  isOpen,
-  setIsOpen,
-  menuItems,
-}) {
+export default function MobileNavigation({isOpen, setIsOpen, menuItems}) {
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
   const [insideMenuOpen, setInsideMenuOpen] = useState(false);
 
@@ -30,7 +25,7 @@ export default function MobileNavigation({
   }, [isOpen]);
 
   return (
-    <div className="border-[2px] w-9 h-9 border-black xl:hidden">
+    <div className="border-[1px] w-9 h-9 border-black md:hidden flex items-center justify-center">
       <OpenFocusTrap>
         <button
           type="button"
@@ -65,33 +60,11 @@ export default function MobileNavigation({
                 <MobileCountrySelector />
               </li>
             </ul>
-            <ul className="flex items-center justify-evenly text-xs mb-6">
-              <li className="min-w-[60px] text-[13px]">
-                <Link
-                  className="group py-5 text-black uppercase"
-                  to={`/`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  Sign In
-                </Link>
-              </li>
-              <li className="min-w-[60px] text-[13px] uppercase">
-                <Link
-                  className="group py-5 text-black"
-                  to={`/`}
-                  onClick={() => setIsOpen(false)}
-                >
-                  FAQS
-                </Link>
-              </li>
-              <li className="min-w-[60px] text-[13px] uppercase">
-                <MobileCountrySelector />
-              </li>
-            </ul>
+            <MobileHeaderIcons />
             <div className="w-full bg-gray-700 p-[5px] flex items-end flex-col transition-all">
               <button
                 onClick={() => setInsideMenuOpen(!insideMenuOpen)}
-                className="bg-gray-900 text-white p-2 rounded flex mx-[5px] my-[6px]"
+                className="bg-gray-900 text-white p-2 rounded flex items-center mx-[5px] my-[6px]"
               >
                 <p className="mr-1">MENU</p>
                 <OpenIcon />

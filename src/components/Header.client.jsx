@@ -1,11 +1,10 @@
 import {useEffect, useState} from 'react';
-import {Link} from '@shopify/hydrogen/client';
-
-import CartToggle from './CartToggle.client';
+import {Link, Image} from '@shopify/hydrogen/client';
 import {useCartUI} from './CartUIProvider.client';
 import CountrySelector from './CountrySelector.client';
 import Navigation from './Navigation.client';
 import MobileNavigation from './MobileNavigation.client';
+import {HeaderIcons} from './Header/HeaderIcons';
 
 /**
  * A client component that specifies the content of the header on the website
@@ -23,9 +22,12 @@ export default function Header({collections, storeName, menuItems}) {
   }, [isCartOpen]);
 
   return (
-    <header className="h-20 lg:h-32" role="banner">
+    <header
+      className="h-[85px] xl:flex xl:items-center xl:justify-center"
+      role="banner"
+    >
       <div
-        className={`fixed z-20 h-20 lg:h-32 w-full border-b border-gray-200 px-4 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto bg-white ${
+        className={`fixed z-20 h-[85px] w-full xl:max-w-[1170px] border-b border-gray-200 px-4 md:px-8 md:py-6 lg:pt-8 lg:pb-0 mx-auto bg-white ${
           isMobileNavOpen ? '' : 'bg-opacity-95'
         }`}
       >
@@ -35,12 +37,16 @@ export default function Header({collections, storeName, menuItems}) {
             paddingRight: isCartOpen ? scrollbarWidth : 0,
           }}
         >
-          <div className="text-center w-full flex justify-between items-center">
+          <div className="text-center w-full flex sm:justify-between items-center">
             <Link
-              className="font-black uppercase text-3xl tracking-widest"
+              className="font-black uppercase text-3xl tracking-widest md:px-[15px]"
               to="/"
             >
-              {storeName}
+              <Image
+                src="https://cdn.shopify.com/s/files/1/0610/1870/1985/files/header.webp?v=1650223175"
+                width={196}
+                height={18}
+              />
             </Link>
             <CountrySelector />
             <MobileNavigation
@@ -49,13 +55,12 @@ export default function Header({collections, storeName, menuItems}) {
               setIsOpen={setIsMobileNavOpen}
               menuItems={menuItems}
             />
-            <CartToggle
-              handleClick={() => {
-                if (isMobileNavOpen) setIsMobileNavOpen(false);
-              }}
+            <Navigation menuItems={menuItems} storeName={storeName} />
+            <HeaderIcons
+              isMobileNavOpen={isMobileNavOpen}
+              setIsMobileNavOpen={setIsMobileNavOpen}
             />
           </div>
-          <Navigation collections={collections} storeName={storeName} />
         </div>
       </div>
     </header>

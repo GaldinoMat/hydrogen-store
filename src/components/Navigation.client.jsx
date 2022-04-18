@@ -3,17 +3,17 @@ import {Link} from '@shopify/hydrogen/client';
 /**
  * A client component that defines the navigation for a web storefront
  */
-export default function Navigation({collections}) {
+export default function Navigation({menuItems}) {
   return (
-    <nav className="hidden xl:block text-center">
+    <nav className="hidden md:block text-center md:px-[15px]">
       <ul className="md:flex items-center justify-center">
-        {collections.map((collection) => (
-          <li key={collection.id}>
+        {menuItems.map((item) => (
+          <li key={item.id}>
             <Link
-              to={`/collections/${collection.handle}`}
-              className="block p-4 hover:opacity-80"
+              to={`${item.url}`}
+              className="block mr-[10px] xl:mr-11 hover:opacity-80 md:text-[18px] font-semibold"
             >
-              {collection.title}
+              {item.title}
             </Link>
           </li>
         ))}

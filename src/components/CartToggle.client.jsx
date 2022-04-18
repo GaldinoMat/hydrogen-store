@@ -22,7 +22,6 @@ export default function CartToggle({handleClick}) {
         toggleCart();
         handleClick();
       }}
-      className="sm:hidden md:block"
     >
       <CartIconWithItems />
       <span className="sr-only">Open cart</span>
