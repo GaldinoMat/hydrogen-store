@@ -8,7 +8,7 @@ import {
 import gql from 'graphql-tag';
 
 import Header from './Header.client';
-import Footer from './Footer.server';
+import Footer from './Footer/Footer.server';
 import Cart from './Cart.client';
 import {Suspense} from 'react';
 
