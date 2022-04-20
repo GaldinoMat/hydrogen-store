@@ -39,12 +39,15 @@ export default function Layout({children, hero}) {
           <Header collections={collections} storeName={storeName} />
           <Cart />
         </Suspense>
-        <main role="main" id="mainContent" className="relative h-screen">
+        <main role="main" id="mainContent" className="relative">
           {hero}
           <div className="mx-auto max-w-7xl p-4 md:py-5 md:px-8 xl:pt-0">
             <Suspense fallback={null}>{children}</Suspense>
           </div>
         </main>
+        <Suspense>
+          <Footer />
+        </Suspense>
       </div>
     </LocalizationProvider>
   );
