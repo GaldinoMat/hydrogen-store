@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {Link, Image} from '@shopify/hydrogen/client';
 import {useCartUI} from '../CartUIProvider.client';
 import CountrySelector from '../CountrySelector.client';
-import Navigation from './Navigation.client';
+import Navigation from './Navigation/Navigation.client';
 import MobileNavigation from './MobileNavigation/MobileNavigation.client';
 import {HeaderIcons} from './HeaderIcons';
 
