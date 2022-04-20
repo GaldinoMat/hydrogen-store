@@ -8,10 +8,12 @@ module.exports = {
       desktop: '1919px',
     },
     flex: {
+      'a-quarter': '25%',
       half: '50%',
       'more-than-half': '66%',
     },
     maxWidth: {
+      'a-quarter': '25%',
       '1/2': '50%',
       'more-than-half': '66%',
     },

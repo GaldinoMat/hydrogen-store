@@ -1,4 +1,6 @@
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {Image, Link} from '@shopify/hydrogen/client';
+import {faEnvelope} from '@fortawesome/free-regular-svg-icons';
 
 /**
  * A server component that specifies the content of the footer on the website
@@ -7,8 +9,8 @@ export default function Footer({collection, product}) {
   return (
     <footer role="contentinfo" className="relative text-white">
       <div className="bg-black px-5 pt-[70px]">
-        <div className="mx-auto max-w-7xl flex sm:flex-col">
-          <div>
+        <div className="mx-auto flex sm:flex-col md:flex-row md:flex-wrap md:max-w-[720px]">
+          <div className="md:flex-half md:max-w-1/2 md:pr-[30px]">
             <div className="mb-[30px]">
               <Link to="/">
                 <Image
@@ -32,7 +34,7 @@ export default function Footer({collection, product}) {
               />
             </div>
           </div>
-          <div className="mb-[30px]">
+          <div className="mb-[30px] md:flex-a-quarter md:max-w-a-quarter md:px-[15px]">
             <h2 className="text-md font-medium uppercase mb-4">Templates</h2>
             <ul className="mt-8 space-y-4 text-gray-400">
               <li className="flex items-center text-sm font-medium hover:text-gray-900">
@@ -51,7 +53,7 @@ export default function Footer({collection, product}) {
               </li>
             </ul>
           </div>
-          <div className="mb-[30px]">
+          <div className="mb-[30px] md:flex-a-quarter md:max-w-a-quarter md:pl-[30px]">
             <h2 className="text-md font-medium uppercase mb-4">Docs</h2>
             <ul className="mt-8 space-y-4 text-gray-400">
               <li className="flex items-center text-sm font-medium hover:text-gray-900">
@@ -66,11 +68,30 @@ export default function Footer({collection, product}) {
               </li>
             </ul>
           </div>
-          <div className="py-6 bg-black border-t-[1px] border-gray-400">
-            <p className="text-gray-400">
-              © {new Date().getFullYear()} Shopify
-            </p>
+          <div className="mb-[60px] md:flex-half md:max-w-1/2 md:pr-[30px] ">
+            <h2 className="text-md font-medium uppercase mb-5">Newsletter</h2>
+            <div className="mb-[15px] flex items-center text-sm font-medium text-gray-400 hover:text-gray-900">
+              <p>
+                Be the first to know about new arrivals, look books, sales &
+                promos!
+              </p>
+            </div>
+            <form action="submit" className="relative">
+              <input
+                type="text"
+                placeholder="Your email here"
+                name=""
+                id=""
+                className="w-full bg-transparent border-b-2 border-white py-[15px] text-gray-400"
+              />
+              <button type="submit" className="absolute top-1/4 right-1">
+                <FontAwesomeIcon icon={faEnvelope} />
+              </button>
+            </form>
           </div>
+        </div>
+        <div className="py-6 md:px-[15px] bg-black border-t-[0.5px] border-gray-400">
+          <p className="text-gray-400">© {new Date().getFullYear()} Shopify</p>
         </div>
       </div>
     </footer>
