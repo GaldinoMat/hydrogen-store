@@ -46,7 +46,7 @@ export default function Layout({children, hero}) {
           </div>
         </main>
         <Suspense>
-          <Footer />
+          <Footer collection={collections[0]} product={products[0]} />
         </Suspense>
       </div>
     </LocalizationProvider>
