@@ -121,7 +121,7 @@ export function ArrowIcon({isOpen}) {
     <svg
       className={`transition-transform duration-300 ${
         isOpen ? 'rotate-180' : null
-      }`}
+      } text-xl ml-2`}
       aria-hidden="true"
       width="10"
       height="6"

@@ -1,30 +1,19 @@
-import {Fragment, useEffect} from 'react';
-import {Link} from '@shopify/hydrogen/client';
+import {Fragment, useState} from 'react';
 import {FocusTrap} from '@headlessui/react';
-
-import MobileCountrySelector from './MobileCountrySelector.client';
-import OpenIcon from './OpenIcon';
-
-let scrollPosition = 0;
+import {OpenIcon} from '../../OpenIcon';
+import {MobileHeaderIcons} from '../HeaderIcons';
+import MobileNavigationTopMenu from './MobileNavigationTopMenu';
+import MobileNavigationSubMenu from './MobileNavigationSubMenu';
 
 /**
  * A client component that defines the navigation for a mobile storefront
  */
-export default function MobileNavigation({collections, isOpen, setIsOpen}) {
+export default function MobileNavigation({isOpen, setIsOpen, menuItems}) {
   const OpenFocusTrap = isOpen ? FocusTrap : Fragment;
-
-  useEffect(() => {
-    if (isOpen) {
-      scrollPosition = window.scrollY;
-      document.body.style.position = 'fixed';
-    } else if (document.body.style.position) {
-      document.body.style.position = '';
-      window.scrollTo(0, scrollPosition);
-    }
-  }, [isOpen]);
+  const [insideMenuOpen, setInsideMenuOpen] = useState(false);
 
   return (
-    <div className="lg:hidden">
+    <div className="border-[1px] w-9 h-9 border-black md:hidden flex items-center justify-center">
       <OpenFocusTrap>
         <button
           type="button"
@@ -35,22 +24,19 @@ export default function MobileNavigation({collections, isOpen, setIsOpen}) {
           {isOpen ? <CloseIcon /> : <OpenIcon />}
         </button>
         {isOpen ? (
-          <div className="fixed -left-0 top-20 w-full h-screen z-10 bg-gray-50 px-4 md:px-12 py-7">
-            <ul>
-              {collections.map((collection) => (
-                <li className="border-b border-gray-200" key={collection.id}>
-                  <Link
-                    className="group py-5 text-gray-700 flex items-center justify-between"
-                    to={`/collections/${collection.handle}`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {collection.title}
-                    <ArrowRightIcon className="hidden group-hover:block" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <MobileCountrySelector />
+          <div className="fixed w-[300px] -left-0 top-0 h-screen z-10 bg-gray-50 px-4 pt-[50px] pr-5 pb-[30px] pl-[30px]">
+            <MobileNavigationTopMenu setIsOpen={setIsOpen} />
+            <MobileHeaderIcons />
+            <MobileNavigationSubMenu
+              insideMenuOpen={insideMenuOpen}
+              menuItems={menuItems}
+              setInsideMenuOpen={setInsideMenuOpen}
+            />
+            <div>
+              <p className="text-black text-[15px] font-normal text-left">
+                Free shipping, 30-day return or refund guarantee.
+              </p>
+            </div>
           </div>
         ) : null}
       </OpenFocusTrap>
