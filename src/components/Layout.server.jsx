@@ -36,7 +36,7 @@ export default function Layout({children, hero}) {
   });
 
   const collections = data ? flattenConnection(data.collections) : null;
-  // const products = data ? flattenConnection(data.products) : null;
+  const products = data ? flattenConnection(data.products) : null;
   const storeName = data ? data.shop.name : '';
 
   const menuItems = menudata ? menudata.menu.items : [];

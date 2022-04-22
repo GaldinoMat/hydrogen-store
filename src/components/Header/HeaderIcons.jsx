@@ -21,7 +21,7 @@ export function MobileHeaderIcons({isMobileNavOpen, setIsMobileNavOpen}) {
       <li className="w-fit text-base flex items-center">
         <CartToggle
           handleClick={() => {
-            if (isMobileNavOpen) setIsMobileNavOpen(false);
+            if (isMobileNavOpen) setIsMobileNavOpen(!isMobileNavOpen);
           }}
         />
         <CartEstimatedCost
@@ -50,7 +50,7 @@ export function HeaderIcons({isMobileNavOpen, setIsMobileNavOpen}) {
       <li className="sm:w-[60px] md:w-fit text-base flex">
         <CartToggle
           handleClick={() => {
-            if (isMobileNavOpen) setIsMobileNavOpen(false);
+            if (isMobileNavOpen) setIsMobileNavOpen(!isMobileNavOpen);
           }}
         />
         <CartEstimatedCost
