@@ -8,7 +8,7 @@ import {
 import gql from 'graphql-tag';
 
 import Header from './Header.client';
-import Footer from './Footer.server';
+import Footer from './Footer/Footer.server';
 import Cart from './Cart.client';
 import {Suspense} from 'react';
 
@@ -39,12 +39,15 @@ export default function Layout({children, hero}) {
           <Header collections={collections} storeName={storeName} />
           <Cart />
         </Suspense>
-        <main role="main" id="mainContent" className="relative h-screen">
+        <main role="main" id="mainContent" className="relative">
           {hero}
           <div className="mx-auto max-w-7xl p-4 md:py-5 md:px-8 xl:pt-0">
             <Suspense fallback={null}>{children}</Suspense>
           </div>
         </main>
+        <Suspense>
+          <Footer collection={collections[0]} product={products[0]} />
+        </Suspense>
       </div>
     </LocalizationProvider>
   );
