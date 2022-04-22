@@ -1,6 +1,6 @@
 import {flattenConnection} from '@shopify/hydrogen';
 import {Suspense, useEffect, useState} from 'react';
-import ProductCard from '../../ProductCard/ProductCard';
+import ProductCard from '../ProductCard/ProductCard';
 import {motion, AnimatePresence} from 'framer-motion';
 import FeaturedProductsTitles from './FeaturedProductsTitles';
 

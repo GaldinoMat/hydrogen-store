@@ -1,6 +1,6 @@
 import {Suspense} from 'react';
-import MoneyCompareAtPrice from '../../MoneyCompareAtPrice.client';
-import MoneyPrice from '../../MoneyPrice.client';
+import MoneyCompareAtPrice from '../../../MoneyCompareAtPrice.client';
+import MoneyPrice from '../../../MoneyPrice.client';
 
 export default function ProductCardBottomPrice({selectedVariant}) {
   return (
