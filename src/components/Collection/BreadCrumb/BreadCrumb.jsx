@@ -2,7 +2,7 @@ import {Link} from '@shopify/hydrogen';
 
 export default function BreadCrumb({collection}) {
   return (
-    <div className="py-10 -mx-[15px] bg-gray-300">
+    <div className="py-10 -mx-5 bg-gray-300">
       <div className="px-[15px]">
         <h4 className="font-bold text-black mb-2">{collection.title}</h4>
         <ul className="flex flex-row text-[15px] text-black">
