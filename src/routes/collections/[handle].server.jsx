@@ -1,14 +1,10 @@
 import {useShop, useShopQuery, flattenConnection, Seo} from '@shopify/hydrogen';
 import gql from 'graphql-tag';
 
-import LoadMoreProducts from '../../components/LoadMoreProducts.client';
 import Layout from '../../components/Layout.server';
 import NotFound from '../../components/NotFound.server';
-import ProductCardCollection from '../../components/Collection/ProductCard/ProductCardCollection';
 import BreadCrumb from '../../components/Collection/BreadCrumb/BreadCrumb';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons';
-import FilterList from '../../components/Collection/List/FilterList.client';
+import PLP from '../../components/Collection/PLP.client';
 
 export default function Collection({
   country = {isoCode: 'US'},
@@ -53,44 +49,14 @@ export default function Collection({
       {/* the seo object will be expose in API version 2022-04 or later */}
       <Seo type="collection" data={collection} />
       <BreadCrumb collection={collection} />
-      <div className="py-[100px]">
-        <div>
-          <form action="submit" className="mb-11 relative">
-            <input
-              type="text"
-              placeholder="Search"
-              name=""
-              id=""
-              className="w-full bg-transparent border-[1px] h-[42px] pl-5 border-gray-400 py-[15px] text-gray-400"
-            />
-            <button
-              type="submit"
-              className="absolute top-1/4 right-1 pr-[15px]"
-            >
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </button>
-          </form>
-          <div></div>
-        </div>
-        <FilterList
-          uniqueColors={uniqueColors}
-          uniqueSizes={uniqueSizes}
-          uniqueTags={uniqueTags}
-        />
-        <p className="text-sm text-gray-500 mt-5 mb-5">
-          {products.length} {products.length > 1 ? 'products' : 'product'}
-        </p>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {products.map((product) => (
-            <li key={product.id}>
-              <ProductCardCollection product={product} />
-            </li>
-          ))}
-        </ul>
-        {hasNextPage && (
-          <LoadMoreProducts startingCount={collectionProductCount} />
-        )}
-      </div>
+      <PLP
+        collectionProductCount={collectionProductCount}
+        hasNextPage={hasNextPage}
+        products={products}
+        uniqueColors={uniqueColors}
+        uniqueSizes={uniqueSizes}
+        uniqueTags={uniqueTags}
+      />
     </Layout>
   );
 }
@@ -119,7 +85,6 @@ const QUERY = gql`
         edges {
           node {
             title
-            vendor
             handle
             compareAtPriceRange {
               maxVariantPrice {
