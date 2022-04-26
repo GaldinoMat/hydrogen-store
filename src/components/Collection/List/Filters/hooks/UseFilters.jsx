@@ -5,7 +5,7 @@ import {
   getTags,
 } from '../../../../../routes/collections/utils/formatVariants';
 
-export function useFilters(target, products, filterName) {
+function useFilters(target, products, filterName) {
   return products.filter((product) => {
     const variants = flattenConnection(product.variants);
 
@@ -25,4 +25,8 @@ export function useFilters(target, products, filterName) {
     }
     return Arr.find((tag) => tag === target) && product;
   });
+}
+
+export function Filters(target, products, filterName) {
+  return useFilters(target, products, filterName);
 }

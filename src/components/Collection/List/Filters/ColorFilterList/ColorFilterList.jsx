@@ -1,4 +1,4 @@
-import {useFilters} from '../hooks/UseFilters';
+import {Filters} from '../hooks/UseFilters';
 
 export default function ColorFilterList({
   setIsColorsOpen,
@@ -8,7 +8,7 @@ export default function ColorFilterList({
   setFilteredProducts,
 }) {
   const handleColorFilter = (colorName) => {
-    const newProducts = useFilters(colorName, products, 'color');
+    const newProducts = Filters(colorName, products, 'color');
 
     setFilteredProducts(newProducts);
   };
