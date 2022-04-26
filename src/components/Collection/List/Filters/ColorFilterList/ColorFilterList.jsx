@@ -1,5 +1,4 @@
-import {flattenConnection} from '@shopify/hydrogen';
-import {getColors} from '../../../../../routes/collections/utils/formatVariants';
+import {useFilters} from '../hooks/UseFilters';
 
 export default function ColorFilterList({
   setIsColorsOpen,
@@ -9,13 +8,7 @@ export default function ColorFilterList({
   setFilteredProducts,
 }) {
   const handleColorFilter = (colorName) => {
-    const newProducts = products.filter((product) => {
-      const variants = flattenConnection(product.variants);
-
-      const ColorsArr = getColors(variants);
-
-      if (ColorsArr.find((color) => color === colorName)) return product;
-    });
+    const newProducts = useFilters(colorName, products, 'color');
 
     setFilteredProducts(newProducts);
   };

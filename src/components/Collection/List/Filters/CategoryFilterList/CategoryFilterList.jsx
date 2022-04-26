@@ -1,5 +1,4 @@
-import {flattenConnection} from '@shopify/hydrogen';
-import {getTags} from '../../../../../routes/collections/utils/formatVariants';
+import {useFilters} from '../hooks/UseFilters';
 
 export default function CategoryFilterList({
   uniqueTags,
@@ -9,13 +8,7 @@ export default function CategoryFilterList({
   products,
 }) {
   const handleCategoryFilter = (categoryName) => {
-    const newProducts = products.filter((product) => {
-      const variants = flattenConnection(product.variants);
-
-      const tagsArr = getTags(variants);
-
-      if (tagsArr.find((tag) => tag === categoryName)) return product;
-    });
+    const newProducts = useFilters(categoryName, products, 'category');
 
     setFilteredProducts(newProducts);
   };

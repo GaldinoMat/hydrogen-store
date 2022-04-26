@@ -1,5 +1,4 @@
-import {flattenConnection} from '@shopify/hydrogen';
-import {getSizes} from '../../../../../routes/collections/utils/formatVariants';
+import {useFilters} from '../hooks/UseFilters';
 
 export default function SizeFilterList({
   setIsSizesOpen,
@@ -9,13 +8,7 @@ export default function SizeFilterList({
   setFilteredProducts,
 }) {
   const handleSizeFilter = (sizeName) => {
-    const newProducts = products.filter((product) => {
-      const variants = flattenConnection(product.variants);
-
-      const sizesArr = getSizes(variants);
-
-      if (sizesArr.find((size) => size === sizeName)) return product;
-    });
+    const newProducts = useFilters(sizeName, products, 'size');
 
     setFilteredProducts(newProducts);
   };
