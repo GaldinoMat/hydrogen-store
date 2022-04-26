@@ -1,4 +1,4 @@
-import {Filters} from '../hooks/UseFilters';
+import {useFilters} from '../hooks/UseFilters';
 
 export default function ColorFilterList({
   setIsColorsOpen,
@@ -7,8 +7,10 @@ export default function ColorFilterList({
   products,
   setFilteredProducts,
 }) {
+  const {filters} = useFilters();
+
   const handleColorFilter = (colorName) => {
-    const newProducts = Filters(colorName, products, 'color');
+    const newProducts = filters(colorName, products, 'color');
 
     setFilteredProducts(newProducts);
   };
@@ -32,8 +34,8 @@ export default function ColorFilterList({
             <button
               className="relative rounded-full w-[30px] h-[30px] after:content-[''] after:w-9 after:h-9 after:absolute after:-top-[3px] after:-left-[3px] after:border-[1px] after:border-gray-400 after:rounded-full"
               style={{backgroundColor: color}}
-              onClick={(e) => handleColorFilter(e.target.id)}
               id={color}
+              onClick={(e) => handleColorFilter(e.target.id)}
             />
           </div>
         ))}

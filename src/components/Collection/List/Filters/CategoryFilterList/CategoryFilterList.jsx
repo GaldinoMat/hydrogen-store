@@ -1,4 +1,4 @@
-import {Filters} from '../hooks/UseFilters';
+import {useFilters} from '../hooks/UseFilters';
 
 export default function CategoryFilterList({
   uniqueTags,
@@ -7,8 +7,10 @@ export default function CategoryFilterList({
   setFilteredProducts,
   products,
 }) {
+  const {filters} = useFilters();
+
   const handleCategoryFilter = (categoryName) => {
-    const newProducts = Filters(categoryName, products, 'category');
+    const newProducts = filters(categoryName, products, 'category');
 
     setFilteredProducts(newProducts);
   };

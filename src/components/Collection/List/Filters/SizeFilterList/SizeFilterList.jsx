@@ -1,4 +1,4 @@
-import {Filters} from '../hooks/UseFilters';
+import {useFilters} from '../hooks/UseFilters';
 
 export default function SizeFilterList({
   setIsSizesOpen,
@@ -7,8 +7,10 @@ export default function SizeFilterList({
   products,
   setFilteredProducts,
 }) {
+  const {filters} = useFilters();
+
   const handleSizeFilter = (sizeName) => {
-    const newProducts = Filters(sizeName, products, 'size');
+    const newProducts = filters(sizeName, products, 'size');
 
     setFilteredProducts(newProducts);
   };
