@@ -1,8 +1,25 @@
+import {flattenConnection} from '@shopify/hydrogen';
+import {getTags} from '../../../../../routes/collections/utils/formatVariants';
+
 export default function CategoryFilterList({
   uniqueTags,
   setIsCategoryOpen,
   isCategoryOpen,
+  setFilteredProducts,
+  products,
 }) {
+  const handleCategoryFilter = (categoryName) => {
+    const newProducts = products.filter((product) => {
+      const variants = flattenConnection(product.variants);
+
+      const tagsArr = getTags(variants);
+
+      if (tagsArr.find((tag) => tag === categoryName)) return product;
+    });
+
+    setFilteredProducts(newProducts);
+  };
+
   return (
     <div className="mb-[25px]">
       <div>
@@ -20,7 +37,12 @@ export default function CategoryFilterList({
       >
         {uniqueTags.map((tag) => (
           <div className="my-2" key={tag}>
-            <p className="capitalize">{tag}</p>
+            <button
+              className="capitalize"
+              onClick={(e) => handleCategoryFilter(e.target.textContent)}
+            >
+              {tag}
+            </button>
           </div>
         ))}
       </div>

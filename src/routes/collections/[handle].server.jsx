@@ -5,6 +5,12 @@ import Layout from '../../components/Layout.server';
 import NotFound from '../../components/NotFound.server';
 import BreadCrumb from '../../components/Collection/BreadCrumb/BreadCrumb';
 import PLP from '../../components/Collection/PLP.client';
+import {
+  getColors,
+  getSizes,
+  getTags,
+  getVariants,
+} from './utils/formatVariants';
 
 export default function Collection({
   country = {isoCode: 'US'},
@@ -31,12 +37,10 @@ export default function Collection({
 
   const collection = data.collection;
   const products = flattenConnection(collection.products);
-  const variants = products
-    .map((product) => flattenConnection(product.variants))
-    .flat();
-  const sizes = variants.map((variant) => variant.title.split(' / ')[0]);
-  const colors = variants.map((variant) => variant.title.split(' / ')[1]);
-  const tags = variants.map((variant) => variant.product.tags).flat();
+  const variants = getVariants(products);
+  const sizes = getSizes(variants);
+  const colors = getColors(variants);
+  const tags = getTags(variants);
 
   const uniqueTags = [...new Set(tags)];
   const uniqueSizes = [...new Set(sizes)];

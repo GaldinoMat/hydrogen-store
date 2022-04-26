@@ -13,12 +13,9 @@ export default function PLP({
   hasNextPage,
   collectionProductCount,
 }) {
-  const [productsState, setProductsState] = useState([]);
   const [filteredproducts, setFilteredProducts] = useState([]);
-  const [activeproducts, setActiveProducts] = useState('SALE');
 
   useEffect(() => {
-    setProductsState(products);
     setFilteredProducts(products);
   }, [products]);
 
@@ -42,6 +39,8 @@ export default function PLP({
         uniqueColors={uniqueColors}
         uniqueSizes={uniqueSizes}
         uniqueTags={uniqueTags}
+        setFilteredProducts={setFilteredProducts}
+        products={products}
       />
       <p className="text-sm text-gray-500 mt-5 mb-5">
         {products.length} {products.length > 1 ? 'products' : 'product'}

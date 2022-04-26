@@ -1,8 +1,24 @@
+import {flattenConnection} from '@shopify/hydrogen';
+import {getColors} from '../../../../../routes/collections/utils/formatVariants';
+
 export default function ColorFilterList({
   setIsColorsOpen,
   isColorsOpen,
   uniqueColors,
+  products,
+  setFilteredProducts,
 }) {
+  const handleColorFilter = (colorName) => {
+    const newProducts = products.filter((product) => {
+      const variants = flattenConnection(product.variants);
+
+      const ColorsArr = getColors(variants);
+
+      if (ColorsArr.find((color) => color === colorName)) return product;
+    });
+
+    setFilteredProducts(newProducts);
+  };
   return (
     <div className="mb-[25px]">
       <div>
@@ -23,6 +39,8 @@ export default function ColorFilterList({
             <button
               className="relative rounded-full w-[30px] h-[30px] after:content-[''] after:w-9 after:h-9 after:absolute after:-top-[3px] after:-left-[3px] after:border-[1px] after:border-gray-400 after:rounded-full"
               style={{backgroundColor: color}}
+              onClick={(e) => handleColorFilter(e.target.id)}
+              id={color}
             />
           </div>
         ))}
